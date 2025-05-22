@@ -5,6 +5,7 @@ from datetime import date
 import random
 from pydantic import Field
 import json
+import secrets
 
 bookings = {
     "flights": [], 
@@ -53,7 +54,7 @@ def book_attraction_tickets(attraction: str, date: date, number_of_people: int) 
         "attraction": attraction,
         "date": date,
         "number_of_people": number_of_people,
-        "booking_reference": random.randrange(1000, 9999)
+        "booking_reference": secrets.SystemRandom().randrange(1000, 9999)
     }
 
     bookings["attractions"].append(attraction_booking)
@@ -68,12 +69,12 @@ def find_flights(
         ) -> list[dict]:
     """Can find flights on a specific date between a departure and destination."""
     values : list[dict] = []
-    for i in range(random.randrange(3, 10)):
+    for i in range(secrets.SystemRandom().randrange(3, 10)):
         values.append({
             "name": f"Flight {i}",
             "date": date,
             "origin": origin,
-            "departure_time": f"{random.randrange(3, 19)}:00",
+            "departure_time": f"{secrets.SystemRandom().randrange(3, 19)}:00",
             "price_pp": f"€{random.randrange(100, 1000)}",
             "destination": destination
         })
@@ -94,7 +95,7 @@ def book_flight(
         "passengers": passengers,
         "origin": origin,
         "destination": destination,
-        "booking_reference": random.randrange(1000, 9999)
+        "booking_reference": secrets.SystemRandom().randrange(1000, 9999)
     }
 
     bookings["flights"].append(flight_booking)
@@ -108,7 +109,7 @@ def find_accommodations(
         ) -> list[dict]:
     """Can find accommodations for a given location and date."""
     values : list[dict] = []
-    for i in range(random.randrange(3, 10)):
+    for i in range(secrets.SystemRandom().randrange(3, 10)):
         values.append(
             {
                 "name": f"Accommodation {i}",
@@ -133,7 +134,7 @@ def book_accommodation(
         "date": check_in_date,
         "nights": nights,
         "guests": guests,
-        "booking_reference": random.randrange(1000, 9999)
+        "booking_reference": secrets.SystemRandom().randrange(1000, 9999)
     }
 
     bookings["accommodations"].append(accommodation_booking)
